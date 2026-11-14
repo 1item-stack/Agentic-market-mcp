@@ -157,6 +157,25 @@ const notAllowed = (_req, res) => res.status(405).json({ jsonrpc: '2.0', error: 
 app.get('/mcp', notAllowed);
 app.delete('/mcp', notAllowed);
 
+// Plain HTTP search: the same catalog for checks and for agents without MCP.
+app.get('/api/search', async (req, res) => {
+  try {
+    const query = String(req.query.q || '').trim();
+    if (!query) return res.status(400).json({ error: 'Missing q' });
+    const num = (v) => (v === undefined || v === '' || Number.isNaN(Number(v)) ? undefined : Number(v));
+    const { products, failed } = await getAllProducts();
+    const { total, items } = search(products, {
+      query, maxPrice: num(req.query.max_price), minPrice: num(req.query.min_price),
+      inStockOnly: req.query.in_stock_only !== 'false', limit: Math.min(num(req.query.limit) || 8, 20),
+    });
+    res.json({ query, catalog_size: products.length, total_matches: total,
+      results: items.map((p) => publicProduct(p)), unavailable_stores: failed });
+  } catch (err) {
+    console.error('api search failed', err);
+    res.status(500).json({ error: 'Search failed' });
+  }
+});
+
 app.get('/healthz', (_req, res) => res.json({ ok: true }));
 app.get('/', async (_req, res) => {
   const stores = await getStores();

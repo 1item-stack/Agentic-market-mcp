@@ -77,6 +77,11 @@ try {
   const badLink = await call(client, 'create_checkout_link', { items: [{ product_id: '1item:1005' }] });
   assert.equal(badLink.isError, true, 'out-of-stock item gives no link');
 
+  const http = await (await fetch(`http://127.0.0.1:${PORT}/api/search?q=${encodeURIComponent('אגרטל לבן')}&max_price=100`)).json();
+  assert.equal(http.catalog_size, 5);
+  assert.equal(http.results[0].title, 'אגרטל קרמיקה לבן מט');
+  assert.equal((await fetch(`http://127.0.0.1:${PORT}/api/search`)).status, 400);
+
   await client.close();
   console.log('PASS: 4 tools, all checks');
 } catch (err) {
