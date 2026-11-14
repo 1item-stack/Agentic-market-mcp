@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1item",
+    "name": "1item",
+    "domain": "1item.co.il",
+    "currency": "ILS",
+    "description": "עיצוב הבית ויודאיקה עד ₪99",
+    "commissionPct": 12,
+    "active": true
+  },
+  {
+    "id": "shema",
+    "name": "SHEMA Modern Judaica",
+    "domain": "REPLACE-WITH-PUBLIC-SHEMA-DOMAIN",
+    "currency": "ILS",
+    "description": "יודאיקה מודרנית",
+    "commissionPct": 12,
+    "active": false
+  }
+]

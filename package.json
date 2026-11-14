@@ -1,0 +1,17 @@
+{
+  "name": "agentic-market-mcp",
+  "version": "0.1.0",
+  "description": "Headless multi-store marketplace exposed to AI agents over MCP (prototype)",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node test/e2e.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "express": "^5.1.0",
+    "zod": "^3.25.0"
+  }
+}

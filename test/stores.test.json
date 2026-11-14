@@ -1,0 +1,2 @@
+[{"id":"1item","name":"1item","domain":"1item.co.il","currency":"ILS","description":"test","commissionPct":12,"active":true},
+ {"id":"broken","name":"Broken store","domain":"broken.example.test","currency":"ILS","description":"no fixture","commissionPct":12,"active":true}]
